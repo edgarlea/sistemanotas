@@ -23,7 +23,7 @@ if (isset($_SESSION['mensaje'])) {
 <body>
     <div class="logo">
     <img src="img/logo.png" alt="logo" style="height: 100px;width:100px;">  
-    <h3 style="text-align: center; padding: top 20px;">Sistema de Notas de Autorizacion de Materiales</h3>
+    <h2 style="text-align: center; padding: top 20px;">Sistema de Notas de Autorizacion de Materiales</h2>
     </div>
 
 <h5 style="text-transform: uppercase">Tipo <?= htmlspecialchars($_SESSION["rol"]) ?></h5>
