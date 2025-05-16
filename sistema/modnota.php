@@ -4,6 +4,10 @@ $id = $_GET['id'];
 $nota = $conn->query("SELECT * FROM notas WHERE id_Nota = '$id'");
 $nota=$nota->fetch_assoc();
 $materiales=$conn->query("SELECT * FROM materiales WHERE id_Nota = '$id'");
+if (isset($_SESSION['mensaje'])) {
+    echo "<script>alert('" . $_SESSION['mensaje'] . "');</script>";
+    unset($_SESSION['mensaje']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +16,7 @@ $materiales=$conn->query("SELECT * FROM materiales WHERE id_Nota = '$id'");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Nota</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <h2>Nota Actual</h2>
@@ -33,7 +37,7 @@ $materiales=$conn->query("SELECT * FROM materiales WHERE id_Nota = '$id'");
 </table>
 </div>
 
-<h2>Materiales</h2>
+<h2>Materiales</h2> <button onclick="abrirModal()" class="btn btn-primary">+ Agregar Material</button>
 <div class="contenedor">
 <table class="table">
 <thead class="text-primary">
@@ -69,9 +73,48 @@ $materiales=$conn->query("SELECT * FROM materiales WHERE id_Nota = '$id'");
 <input type="date" name="vencimiento" id="vencimiento" required><br><br>
 <button type="submit" class="btn btn-primary">Guardar Nota</button>
 </form>
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Nuevo Material</h3>
+      <span class="close" onclick="cerrarModal()">&times;</span>
+    </div>
+
+    <form action="nuevomaterial.php" method="POST">
+      <div class="modal-body">
+        <input type="number" name="idnota" value="<?php echo $id?>" hidden>
+        <label>Nombre:</label>
+      <input type="text" name="material_nombre" required><br>
+      <label>Tipo:</label>
+      <input type="text" name="material_tipo" required><br>
+      <label>Cantidad:</label>
+      <input type="number" name="material_cantidad" required><br>
+      <label>Descripción:</label>
+      <textarea name="material_descripcion"></textarea>
+        <div style="display: flex; justify-content: space-between;">
+          <button type="button" class="btn btn-cancel" onclick="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 <script>
         document.getElementById('personalautorizado').value = '<?= $nota['personal']?>';
         document.getElementById('vencimiento').value = '<?= $nota['vencimiento']?>';
+  function abrirModal() {
+    document.getElementById('myModal').style.display = 'block';
+  }
+
+  function cerrarModal() {
+    document.getElementById('myModal').style.display = 'none';
+  }
+window.onclick = function(event) {
+const modal = document.getElementById('myModal');
+if (event.target === modal) {
+      cerrarModal();
+}
+}
 </script>
 </body>
 </html>
