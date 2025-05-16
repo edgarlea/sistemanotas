@@ -27,8 +27,8 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
     <ul id="menu">
       <li><a href="index.php">Inicio</a></li>
       <li><a href="#" onclick="crearnota();">Crear Nota</a></li>
-      <li><a href="usuarios.php">Usuarios</a></li>
-      <li><a href="reportes.php">Notas</a></li>
+      <li><a href="#">Personal Autorizado</a></li>
+      <li><a href="#">Notas</a></li>
     </ul>
 </nav>
 <div class="contenedor opciones" id="contenedornota">
@@ -83,16 +83,13 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
     <td><?= $row['vencimiento'] ?></td> 
     <td><?= $row['estado'] ?></td>    
         <td>
-        <a href="modificar.php?id=<?= $row['id_Nota'] ?>">Modificar</a> 
-        <a href="eliminar.php?id=<?= $row['id_Nota'] ?>">Eliminar</a>
+        <a href="sistema/modnota.php?id=<?= $row['id_Nota'] ?>">Modificar</a> 
+        <a href="sistema/elinota.php?id=<?= $row['id_Nota'] ?>">Eliminar</a>
         </td>    
     </tr>
     <?php endwhile; ?>
 </tbody>
 </table>
-</div>
-<div class="contenedor">
-
 </div>
 <script>
     function toggleMenu() {

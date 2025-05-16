@@ -25,10 +25,8 @@ $result = $conn->query("SELECT * FROM usuarios where activo=0");
 <nav>
     <ul id="menu">
       <li><a href="index.php">Inicio</a></li>
-      <li><a href="ver_solicitudes.php">Solicitudes</a></li>
-      <li><a href="crear_solicitud.php">Crear Solicitud</a></li>
-      <li><a href="usuarios.php">Usuarios</a></li>
-      <li><a href="reportes.php">Notas</a></li>
+      <li><a href="#">Notas</a></li>
+      <li><a href="#">Usuarios</a></li>
     </ul>
 </nav>
 <h2>Pendientes</h2>
