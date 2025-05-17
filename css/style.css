@@ -57,7 +57,40 @@ form {
 .btn-primary.focus {
   box-shadow: none, 0 0 0 0.2rem rgba(33, 150, 243, 0.5);
 }
+.btn-warning {
+  color: #212529;
+  background-color: #ffeb3b;
+  border-color: #ffeb3b;
+  box-shadow: none;
+}
 
+.btn-warning:hover {
+  color: #212529;
+  background-color: #ffe715;
+  border-color: #ffe608;
+}
+
+.btn-warning:focus,
+.btn-warning.focus {
+  box-shadow: none, 0 0 0 0.2rem rgba(255, 235, 59, 0.5);
+}
+.btn-danger {
+  color: #ffffff;
+  background-color: #f44336;
+  border-color: #f44336;
+  box-shadow: none;
+}
+
+.btn-danger:hover {
+  color: #ffffff;
+  background-color: #f22112;
+  border-color: #ea1c0d;
+}
+
+.btn-danger:focus,
+.btn-danger.focus {
+  box-shadow: none, 0 0 0 0.2rem rgba(244, 67, 54, 0.5);
+}
 header {
   background-color: #004080;
   color: white;

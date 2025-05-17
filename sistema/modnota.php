@@ -36,7 +36,8 @@ if (isset($_SESSION['mensaje'])) {
 </tbody>
 </table>
 </div>
-<form method="POST">
+<form action="actualizarnota.php" method="POST">
+  <input type="number" name="idnota" value="<?= $nota['id_Nota']?>" hidden>
 <label>Personal Autorizado:</label>
 <input type="text" name="personalautorizado" id="personalautorizado" required><br><br>
 <label>Fecha de Vencimiento:</label>
@@ -64,7 +65,9 @@ if (isset($_SESSION['mensaje'])) {
     <td><?= $row['descripcion'] ?></td>    
         <td>
         <button onclick="abrirModificarModal(<?= $row['id'] ?>)" class="btn btn-primary">Modificar</button> 
-        <a href="sistema/elimaterial.php?id=<?= $row['id'] ?>">Eliminar</a>
+        <a href="sistema/elimaterial.php?id=<?= $row['id'] ?>">
+           <button class="btn btn-danger">Eliminar</button> 
+        </a>
         </td>    
     </tr>
     <?php endwhile; ?>
@@ -102,11 +105,12 @@ if (isset($_SESSION['mensaje'])) {
       <h3>Modificar Material</h3>
       <span class="close" onclick="cerrarModal()">&times;</span>
     </div>
-    <form action="#" method="POST">
+    <form action="modmaterial.php" method="POST">
+      <input type="number" name="idnota" value="<?php echo $id?>" hidden>
       <div class="modal-body">
         <div id="contenidoModal">Cargando...</div>
         <div style="display: flex; justify-content: space-between;">
-          <button type="button" class="btn btn-cancel" onclick="cerrarModal()">Cancelar</button>
+          <button type="button" class="btn btn-danger" onclick="cerrarModal()">Cancelar</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
       </div>
@@ -144,18 +148,3 @@ if (event.target === modal) {
 </script>
 </body>
 </html>
-
-<?php
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (($nota['personal']!== $personal) or ($nota['vencimiento']!== $vencimiento)){
-     $personal = $_POST["personalautorizado"];
-     $vencimiento = $_POST["vencimiento"];
-     $conn->query("UPDATE notas SET vencimiento='$vencimiento', personal = '$personal' WHERE id_Nota = $id");
-     $_SESSION['mensaje'] = 'La nota fue modificada correctamente!.';
-    header("Location: modnota.php?id=$id");
-    exit();
-    }
-    
-}
-?>
