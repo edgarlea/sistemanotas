@@ -19,6 +19,7 @@ if (isset($_SESSION['mensaje'])) {
     <link rel="stylesheet" href="/sistemanotas/css/style.css">
 </head>
 <body>
+  
 <h2>Nota Actual</h2>
 <div class="contenedor notas">
 <table class="table">
@@ -44,7 +45,7 @@ if (isset($_SESSION['mensaje'])) {
 <input type="date" name="vencimiento" id="vencimiento" required><br><br>
 <button type="submit" class="btn btn-primary">Actualizar Nota</button>
 </form>
-<h2>Materiales</h2> <button onclick="abrirModal()" class="btn btn-primary">+ Agregar Material</button>
+<h2 style="text-align: center;">Materiales Cargados <button onclick="abrirModal()" class="btn btn-primary">+ Agregar Material</button></h2>
 <div class="contenedor">
 <table class="table">
 <thead class="text-primary">
@@ -64,10 +65,8 @@ if (isset($_SESSION['mensaje'])) {
     <td><?= $row['cant'] ?></td>
     <td><?= $row['descripcion'] ?></td>    
         <td>
-        <button onclick="abrirModificarModal(<?= $row['id'] ?>)" class="btn btn-primary">Modificar</button> 
-        <a href="sistema/elimaterial.php?id=<?= $row['id'] ?>">
-           <button class="btn btn-danger">Eliminar</button> 
-        </a>
+        <button onclick="abrirModificarModal(<?= $row['id'] ?>)" class="btn btn-primary">Modificar</button>
+        <button onclick="eliminarModal(<?= $row['id'] ?>)" class="btn btn-danger">Eliminar</button> 
         </td>    
     </tr>
     <?php endwhile; ?>
@@ -92,7 +91,7 @@ if (isset($_SESSION['mensaje'])) {
       <label>Descripción:</label>
       <textarea name="material_descripcion" rows="4" cols="35"></textarea>
         <div style="display: flex; justify-content: space-between;">
-          <button type="button" class="btn btn-cancel" onclick="cerrarModal()">Cancelar</button>
+          <button type="button" class="btn btn-danger" onclick="cerrarModal()">Cancelar</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
       </div>
@@ -117,12 +116,34 @@ if (isset($_SESSION['mensaje'])) {
     </form>
   </div>
 </div>
-
+<div id="eliminarModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Eliminar Material</h3>
+      <span class="close" onclick="cerrarModal()">&times;</span>
+    </div>
+    <form action="eliminarmaterial.php" method="POST">
+      <div class="modal-body">
+        <input type="number" name="idnota" value="<?= $id?>" hidden>
+        <input type="number" name="idmaterial" id="idMaterial" hidden>
+        <h3>Esta seguro que quiere eliminar el material?</h3>
+        <div style="display: flex; justify-content: space-between;">
+          <button type="button" class="btn btn-danger" onclick="cerrarModal()">NO</button>
+          <button type="submit" class="btn btn-primary">SI</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 <script>
         document.getElementById('personalautorizado').value = '<?= $nota['personal']?>';
         document.getElementById('vencimiento').value = '<?= $nota['vencimiento']?>';
   function abrirModal() {
     document.getElementById('nuevoModal').style.display = 'block';
+  }
+   function eliminarModal(idMaterial) {
+    document.getElementById('eliminarModal').style.display = 'block';
+    document.getElementById('idMaterial').value = idMaterial;
   }
  function abrirModificarModal(idMaterial) {
     document.getElementById('modificarModal').style.display = 'block';
@@ -137,6 +158,7 @@ if (isset($_SESSION['mensaje'])) {
   }
   function cerrarModal() {
     document.getElementById('modificarModal').style.display = 'none';
+    document.getElementById('eliminarModal').style.display = 'none';
     document.getElementById('nuevoModal').style.display = 'none';
   }
 window.onclick = function(event) {

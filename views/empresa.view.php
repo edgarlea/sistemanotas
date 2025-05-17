@@ -65,7 +65,7 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
 </form>
 </div>
 
-<h2>Notas Pendientes de Aprobacion</h2>
+<h2 style="text-align: center;">Notas Pendientes de Aprobacion</h2>
 <div class="contenedor notas">
 <table class="table">
 <thead class="text-primary">
@@ -83,19 +83,53 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
     <td><?= $row['vencimiento'] ?></td> 
     <td><?= $row['estado'] ?></td>    
         <td>
-        <a href="sistema/modnota.php?id=<?= $row['id_Nota'] ?>">Modificar</a> 
-        <a href="sistema/elinota.php?id=<?= $row['id_Nota'] ?>">Eliminar</a>
+        <a href="sistema/modnota.php?id=<?= $row['id_Nota'] ?>">
+          <button class="btn btn-primary">Modificar</button>
+          </a> 
+          <button onclick="eliminarModal(<?= $row['id_Nota'] ?>)" class="btn btn-danger">Eliminar</button>
+        
         </td>    
     </tr>
     <?php endwhile; ?>
 </tbody>
 </table>
 </div>
+<div id="eliminarModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Eliminar Nota</h3>
+      <span class="close" onclick="cerrarModal()">&times;</span>
+    </div>
+    <form action="sistema/eliminarnota.php" method="POST">
+      <div class="modal-body">
+        <input type="number" name="idnota" id="idNota" hidden>
+        <h3>Esta seguro que quiere eliminar la nota?</h3>
+        <div style="display: flex; justify-content: space-between;">
+          <button type="button" class="btn btn-danger" onclick="cerrarModal()">NO</button>
+          <button type="submit" class="btn btn-primary">SI</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 <script>
     function toggleMenu() {
     const menu = document.getElementById('menu');
     menu.classList.toggle('active');
     }
+function eliminarModal(idNota) {
+    document.getElementById('eliminarModal').style.display = 'block';
+    document.getElementById('idNota').value = idNota;
+  }
+ function cerrarModal() {
+    document.getElementById('eliminarModal').style.display = 'none';
+  }
+window.onclick = function(event) {
+const modal = document.getElementById('eliminarModal');
+if (event.target === modal) {
+      cerrarModal();
+}
+}
 function crearnota() {
  document.getElementById("contenedornota").style.display = "block";
 }
