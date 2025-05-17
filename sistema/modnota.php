@@ -16,7 +16,7 @@ if (isset($_SESSION['mensaje'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Nota</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/sistemanotas/css/style.css">
 </head>
 <body>
 <h2>Nota Actual</h2>
@@ -63,7 +63,7 @@ if (isset($_SESSION['mensaje'])) {
     <td><?= $row['cant'] ?></td>
     <td><?= $row['descripcion'] ?></td>    
         <td>
-        <a href="sistema/modmaterial.php?id=<?= $row['id'] ?>">Modificar</a> 
+        <button onclick="abrirModificarModal(<?= $row['id'] ?>)" class="btn btn-primary">Modificar</button> 
         <a href="sistema/elimaterial.php?id=<?= $row['id'] ?>">Eliminar</a>
         </td>    
     </tr>
@@ -71,15 +71,12 @@ if (isset($_SESSION['mensaje'])) {
 </tbody>
 </table>
 </div>
-
-
-<div id="myModal" class="modal">
+<div id="nuevoModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
       <h3>Nuevo Material</h3>
       <span class="close" onclick="cerrarModal()">&times;</span>
     </div>
-
     <form action="nuevomaterial.php" method="POST">
       <div class="modal-body">
         <input type="number" name="idnota" value="<?php echo $id?>" hidden>
@@ -90,7 +87,7 @@ if (isset($_SESSION['mensaje'])) {
       <label>Cantidad:</label>
       <input type="number" name="material_cantidad" required><br>
       <label>Descripción:</label>
-      <textarea name="material_descripcion"></textarea>
+      <textarea name="material_descripcion" rows="4" cols="35"></textarea>
         <div style="display: flex; justify-content: space-between;">
           <button type="button" class="btn btn-cancel" onclick="cerrarModal()">Cancelar</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
@@ -99,18 +96,47 @@ if (isset($_SESSION['mensaje'])) {
     </form>
   </div>
 </div>
+<div id="modificarModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Modificar Material</h3>
+      <span class="close" onclick="cerrarModal()">&times;</span>
+    </div>
+    <form action="#" method="POST">
+      <div class="modal-body">
+        <div id="contenidoModal">Cargando...</div>
+        <div style="display: flex; justify-content: space-between;">
+          <button type="button" class="btn btn-cancel" onclick="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
         document.getElementById('personalautorizado').value = '<?= $nota['personal']?>';
         document.getElementById('vencimiento').value = '<?= $nota['vencimiento']?>';
   function abrirModal() {
-    document.getElementById('myModal').style.display = 'block';
+    document.getElementById('nuevoModal').style.display = 'block';
   }
-
+ function abrirModificarModal(idMaterial) {
+    document.getElementById('modificarModal').style.display = 'block';
+    const xhr = new XMLHttpRequest();
+        xhr.open("GET", "cargar_datos.php?id=" + idMaterial, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        document.getElementById('contenidoModal').innerHTML = xhr.responseText;
+      }
+    };
+    xhr.send();
+  }
   function cerrarModal() {
-    document.getElementById('myModal').style.display = 'none';
+    document.getElementById('modificarModal').style.display = 'none';
+    document.getElementById('nuevoModal').style.display = 'none';
   }
 window.onclick = function(event) {
-const modal = document.getElementById('myModal');
+const modal = document.getElementById('nuevoModal');
 if (event.target === modal) {
       cerrarModal();
 }

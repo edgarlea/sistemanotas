@@ -47,14 +47,15 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
   <h3>Agregar Materiales</h3>
   <div id="materiales-container">
     <div class="material">
+      <br>
       <label>Nombre:</label>
       <input type="text" name="material_nombre[]" required><br>
       <label>Tipo:</label>
       <input type="text" name="material_tipo[]" required><br>
       <label>Cantidad:</label>
       <input type="number" name="material_cantidad[]" required><br>
-      <label>Descripción:</label>
-      <textarea name="material_descripcion[]"></textarea><br><br>
+      <label>Descripción:</label><br>
+      <textarea name="material_descripcion[]" rows="4" cols="30"></textarea><br><br>
     </div>
   </div>
 
@@ -103,14 +104,15 @@ function agregarMaterial() {
   const nuevo = document.createElement('div');
   nuevo.classList.add('material');
   nuevo.innerHTML = `
-    <label>Nombre:</label>
+  <br>  
+  <label>Nombre:</label>
     <input type="text" name="material_nombre[]" required><br>
     <label>Tipo:</label>
     <input type="text" name="material_tipo[]" required><br>
     <label>Cantidad:</label>
     <input type="number" name="material_cantidad[]" required><br>
-    <label>Descripción:</label>
-    <textarea name="material_descripcion[]"></textarea><br><br>
+    <label>Descripción:</label><br>
+    <textarea name="material_descripcion[]" rows="4" cols="30"></textarea><br><br>
   `;
   container.appendChild(nuevo);
 }

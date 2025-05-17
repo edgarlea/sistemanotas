@@ -55,7 +55,9 @@ $result = $conn->query("SELECT * FROM usuarios where activo=0");
 </table>
 </div>
 <div class="contenedor">
-
+<?php
+ require '/sistemanotas/sistema/modnota.php';
+?>
 </div>
 <script>
     function toggleMenu() {

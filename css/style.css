@@ -218,6 +218,13 @@ textarea {
   border: 2px solid rgb(117, 116, 116);
   border-radius: 10px; 
 }
+.material {
+  border: 2px solid rgb(117, 116, 116);
+  border-radius: 10px;
+  text-align: center;
+  height: 200px;
+  width: 300px; 
+}
 .opciones {
       display: none;
       margin-top: 10px;
