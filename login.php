@@ -13,7 +13,7 @@ if (isset($_SESSION['mensaje'])) {
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="contenedor">
+<div class="contenedor" style="height: 200px; width:300px; text-align:center;margin: 0 auto">
 <form method="POST">
     <h2>Iniciar sesión</h2>
     <input type="text" name="nomusu" placeholder="Nombre de Usuario" required><br>
@@ -22,7 +22,7 @@ if (isset($_SESSION['mensaje'])) {
 </form>
 </div>
 
-<h4 style="text-align: center;"><a href="">Olvido su Contraseña?</a>&nbsp;&nbsp;&nbsp;<a href="registro.php">Registrar</a></h4>
+<h4 style="text-align: center;"><a href="registro.php">Registrar</a></h4>
 </body>
 </html>
 <?php

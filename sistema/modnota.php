@@ -36,12 +36,18 @@ if (isset($_SESSION['mensaje'])) {
 </tbody>
 </table>
 </div>
-
+<form method="POST">
+<label>Personal Autorizado:</label>
+<input type="text" name="personalautorizado" id="personalautorizado" required><br><br>
+<label>Fecha de Vencimiento:</label>
+<input type="date" name="vencimiento" id="vencimiento" required><br><br>
+<button type="submit" class="btn btn-primary">Actualizar Nota</button>
+</form>
 <h2>Materiales</h2> <button onclick="abrirModal()" class="btn btn-primary">+ Agregar Material</button>
 <div class="contenedor">
 <table class="table">
 <thead class="text-primary">
-<th>Nro</th>
+<th>Codigo</th>
 <th>Nombre</th>
 <th>Tipo</th>
 <th>Cantidad</th>
@@ -66,13 +72,7 @@ if (isset($_SESSION['mensaje'])) {
 </table>
 </div>
 
-<form method="POST">
-<label>Personal Autorizado:</label>
-<input type="text" name="personalautorizado" id="personalautorizado" required><br><br>
-<label>Fecha de Vencimiento:</label>
-<input type="date" name="vencimiento" id="vencimiento" required><br><br>
-<button type="submit" class="btn btn-primary">Guardar Nota</button>
-</form>
+
 <div id="myModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -122,6 +122,14 @@ if (event.target === modal) {
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
+    if (($nota['personal']!== $personal) or ($nota['vencimiento']!== $vencimiento)){
+     $personal = $_POST["personalautorizado"];
+     $vencimiento = $_POST["vencimiento"];
+     $conn->query("UPDATE notas SET vencimiento='$vencimiento', personal = '$personal' WHERE id_Nota = $id");
+     $_SESSION['mensaje'] = 'La nota fue modificada correctamente!.';
+    header("Location: modnota.php?id=$id");
+    exit();
+    }
+    
 }
 ?>

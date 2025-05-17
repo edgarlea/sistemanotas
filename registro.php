@@ -8,12 +8,14 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<form method="POST">
+<div class="contenedor" style="width:600px; text-align:center;margin: 0 auto">
+ <form method="POST">
     <h2>Registro</h2>
     <label>Nombre de Usuario:</label>
     <input type="text" name="nombre" placeholder="Nombre de Usuario" required><br>
     <label>Email:</label>
     <input type="email" name="email" placeholder="Correo electrónico" required><br>
+    <label>Contraseña:</label>
     <input type="password" name="password" placeholder="Contraseña" required>
     <input type="password" name="pass2" placeholder="Repetir Contraseña" required><br>
     <label>Rol:</label>
@@ -22,7 +24,7 @@
         <option value="empresa">Empresa</option>
         <option value="administrador">Administrador</option>
         <option value="visualizador">Visualizador</option>
-    </select><br>
+    </select><br> 
 
 <!--datos empresa-->
 <div id="camposEmpresa" class="opciones">
@@ -55,7 +57,7 @@
 </div>
 <button type="submit" class="btn btn-primary">Registrarse</button>
 </form>
-
+</div>
   <script>
     function mostrarCampos() {
       document.getElementById("camposEmpresa").style.display = "none";

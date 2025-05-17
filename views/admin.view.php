@@ -46,8 +46,8 @@ $result = $conn->query("SELECT * FROM usuarios where activo=0");
     <td><?= htmlspecialchars($row['nomusu']) ?></td>
     <td><?= $row['rol'] ?></td>    
         <td>NO
-        <a href="aprobar.php?id=<?= $row['id'] ?>">Aprobar</a> 
-        <a href="rechazar.php?id=<?= $row['id'] ?>">Rechazar</a>
+        <a href="sistema/funciones.php?op=a&id=<?= $row['id'] ?>">Aprobar</a> 
+        <a href="sistema/funciones.php?op=r&id=<?= $row['id'] ?>">Rechazar</a>
         </td>    
     </tr>
     <?php endwhile; ?>

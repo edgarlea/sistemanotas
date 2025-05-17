@@ -27,7 +27,6 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
     <ul id="menu">
       <li><a href="index.php">Inicio</a></li>
       <li><a href="#" onclick="crearnota();">Crear Nota</a></li>
-      <li><a href="#">Personal Autorizado</a></li>
       <li><a href="#">Notas</a></li>
     </ul>
 </nav>

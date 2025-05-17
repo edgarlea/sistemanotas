@@ -25,6 +25,6 @@ for ($i = 0; $i < count($nombres); $i++) {
                 VALUES ('$id_nota', '$nombre', '$tipo', '$cantidad', '$descripcion')");
 }
 $_SESSION['mensaje'] = 'La Nota fue ingresa correctamente, quedando pendiente sujeta a aprobación.';
-header("Location: /index.php");
+header("Location: /sistemanotas/index.php");
 exit;
 ?>
