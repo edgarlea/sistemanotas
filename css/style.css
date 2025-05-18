@@ -91,6 +91,28 @@ form {
 .btn-danger.focus {
   box-shadow: none, 0 0 0 0.2rem rgba(244, 67, 54, 0.5);
 }
+.footer {
+  padding: 0.9375rem 0;
+  text-align: center;
+  display: -webkit-flex;
+  display: flex;
+}
+.footer .copyright {
+  padding: 15px 0;
+}
+.footer .footer-brand {
+  float: left;
+  height: 50px;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+  margin-left: -15px;
+}
+
+.footer .footer-brand:hover,
+.footer .footer-brand:focus {
+  color: #3C4858;
+}
 header {
   background-color: #004080;
   color: white;

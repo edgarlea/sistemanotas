@@ -23,7 +23,7 @@ $vigente = $conn->query("SELECT * FROM notas WHERE estado = 'Aprobado' AND venci
       <li><a href="index.php">Inicio</a></li>
     </ul>
 </nav>
-
+<br>
 <div class="contenedor">
 <h4 style="text-align: center;">Notas Vigentes</h4>
 <div class="table-responsive">

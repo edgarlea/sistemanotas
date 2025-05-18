@@ -1,6 +1,7 @@
 <?php
 include 'conexion.php';
 $id = $_GET['id'];
+$usu=$_SESSION["nomusu"];
 $nota = $conn->query("SELECT * FROM notas WHERE id_Nota = '$id'");
 $nota=$nota->fetch_assoc();
 $materiales=$conn->query("SELECT * FROM materiales WHERE id_Nota = '$id'");
@@ -31,11 +32,26 @@ $rol=$_SESSION["rol"];
 <div class="contenedor notas">
 <table class="table">
 <thead class="text-primary">
+  <?php
+  $ap=$nota['aprueba'];
+  if ($ap!=null){
+  echo  "<th>Aprobado por:</th>";
+  }
+  ?>
+ 
 <th>Personal Autorizado</th>
 <th>Vencimiento</th>
 </thead>
 <tbody>
     <tr>
+ <?php
+  $ap=$nota['aprueba'];
+  if ($ap!=null){
+   echo "<td>". $ap."</td>";
+  }
+  ?>
+
+    
     <td><?= $nota['personal'] ?></td>
     <td><?= $nota['vencimiento'] ?></td>    
     </tr>
@@ -77,6 +93,7 @@ echo "<h4>Acciones</h4>
 <div class='contenedor'>  
     <form action='apruebanota.php' method='POST'>
   <input type='number'name='idnota' value=". $nota['id_Nota'] ." hidden>
+  <input type='number'name='nomusu' value=". $usu ." hidden>
 <h3 style='text-align: center;'>Desea aprobar o rechazar la nota?:
 <select name='aprob' required>
         <option value=''>Seleccionar</option>

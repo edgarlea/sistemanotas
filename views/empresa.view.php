@@ -84,8 +84,11 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
     <td><?= $row['vencimiento'] ?></td> 
     <td><?= $row['estado'] ?></td>    
         <td>
-        <a href="sistema/modnota.php?id=<?= $row['id_Nota'] ?>">
+        <a href="sistema/vernota.php?id=<?= $row['id_Nota'] ?>">
           <button class="btn btn-primary">Ver</button>
+          </a> 
+          <a href="sistema/modnota.php?id=<?= $row['id_Nota'] ?>">
+          <button class="btn btn-warning">Modificar</button>
           </a> 
           <button onclick="eliminarModal(<?= $row['id_Nota'] ?>)" class="btn btn-danger">Eliminar</button>
         
@@ -116,6 +119,8 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
     <td><?= $row['vencimiento'] ?></td> 
     <td><?= $row['estado'] ?></td>    
         <td>
+          <a href="sistema/vernota.php?id=<?= $row['id_Nota'] ?>">
+          <button class="btn btn-primary">Ver</button></a>
           <button onclick="eliminarModal(<?= $row['id_Nota'] ?>)" class="btn btn-danger">Eliminar</button>
         </td>    
     </tr>

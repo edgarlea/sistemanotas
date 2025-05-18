@@ -29,17 +29,15 @@ if (isset($_SESSION['mensaje'])) {
       
     </ul>
 </nav>
-<h2>Nota Actual</h2>
+<h2 style="text-align: center;">Nota de Autorización Nº<?= $nota['id_Nota'] ?></h2>
 <div class="contenedor notas">
 <table class="table">
 <thead class="text-primary">
-<th>Nro</th>
 <th>Personal Autorizado</th>
 <th>Vencimiento</th>
 </thead>
 <tbody>
     <tr>
-    <td><?= $nota['id_Nota'] ?></td>
     <td><?= $nota['personal'] ?></td>
     <td><?= $nota['vencimiento'] ?></td>    
     </tr>
