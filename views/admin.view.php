@@ -33,6 +33,7 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
 <h2>Pendientes</h2>
 <div class="contenedor">
 <h4 style="text-align: center;">Activar Cuenta de Usuarios</h4>
+<div class="table-responsive">
 <table class="table">
 <thead class="text-primary">
 <th>ID</th>
@@ -57,9 +58,11 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
 </tbody>
 </table>
 </div>
+</div>
 <br>
 <div class="contenedor">
 <h4 style="text-align: center;">Aprobar Notas Pendientes</h4>
+<div class="table-responsive">
 <table class="table">
 <thead class="text-primary">
 <th>Nro</th>
@@ -94,6 +97,7 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
     <?php endwhile; ?>
 </tbody>
 </table>
+</div>
 </div>
 
 <div id="eliminarModal" class="modal">
