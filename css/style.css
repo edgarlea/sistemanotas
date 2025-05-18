@@ -205,7 +205,14 @@ nav li a:hover {
   table {
     font-size: 14px;
   }
-
+  .table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -webkit-overflow-scrolling: touch;
+  }
   th, td {
     padding: 8px;
   }

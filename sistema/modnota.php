@@ -19,7 +19,16 @@ if (isset($_SESSION['mensaje'])) {
     <link rel="stylesheet" href="/sistemanotas/css/style.css">
 </head>
 <body>
-  
+  <header>
+    <h1>Panel de Empresa</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</header>
+<nav>
+    <ul id="menu">
+      <li><a href="/sistemanotas/index.php">Inicio</a></li>
+      
+    </ul>
+</nav>
 <h2>Nota Actual</h2>
 <div class="contenedor notas">
 <table class="table">
@@ -136,6 +145,10 @@ if (isset($_SESSION['mensaje'])) {
   </div>
 </div>
 <script>
+   function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.classList.toggle('active');
+    }
         document.getElementById('personalautorizado').value = '<?= $nota['personal']?>';
         document.getElementById('vencimiento').value = '<?= $nota['vencimiento']?>';
   function abrirModal() {

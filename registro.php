@@ -91,26 +91,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $s = $conn->prepare("INSERT INTO usuarios (nomusu, email, password, rol) VALUES (?, ?, ?, ?)");
     $s->bind_param("ssss", $nombre, $email, $hash, $rol);
     $s->execute();
-    $result = $conn->query("SELECT * FROM usuarios where nomusu='$nombre'");
-    $user = $result->fetch_assoc();
-    if ($rol=="empresa"){
-      $nomEmpresa = $conn->real_escape_string($_POST["nombreEmpresa"]);
-      $resp = $conn->real_escape_string($_POST["respo"]);
-      $tel = $_POST["tel"];
-    $s = $conn->prepare("INSERT INTO empresas (id_Usuario,nombre, telefono, responsable) VALUES (?,?, ?, ?)");
-    $s->bind_param("isss", $user['id'], $nomEmpresa, $tel, $resp);
-    $s->execute();
-    }
-      if($rol=="visualizador"){
-      $legajo=$_POST["legajo"];
+    $user = $s->insert_id;
+    switch  ($rol){
+        case 'empresa':
+        $nomEmpresa = $conn->real_escape_string($_POST["nombreEmpresa"]);
+        $resp = $conn->real_escape_string($_POST["respo"]);
+        $tel = $_POST["tel"];
+        $s = $conn->prepare("INSERT INTO empresas (id_Usuario,nombre, telefono, responsable) VALUES (?,?, ?, ?)");
+        $s->bind_param("isss", $user, $nomEmpresa, $tel, $resp);
+        $s->execute();
+        break;
+        case 'visualizador':
+        $legajo=$_POST["legajo"];
       $nomVisual = $conn->real_escape_string($_POST["nomVisual"]);
       $apeVisual = $conn->real_escape_string($_POST["apeVisual"]);
       $j = $_POST["jerarquia"];
       $c=$_POST["cargo"];
       $s = $conn->prepare("INSERT INTO visualizadores (legajo, id_Usuario,nombre, apellido, jerarquia, cargo) VALUES (?,?,?,?, ?, ?)");
-      $s->bind_param("ssssss",$legajo, $user['id'], $nomVisual,$apeVisual, $j, $c);
+      $s->bind_param("ssssss",$legajo, $user, $nomVisual,$apeVisual, $j, $c);
       $s->execute();
-      }
+      break;
+    }
     $_SESSION['mensaje'] = 'El usuario fue creado correctamente!.';
     header("Location: login.php");
     exit();

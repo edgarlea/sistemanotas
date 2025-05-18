@@ -67,6 +67,7 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
 
 <h2 style="text-align: center;">Notas Pendientes de Aprobacion</h2>
 <div class="contenedor notas">
+<div class="table-responsive">
 <table class="table">
 <thead class="text-primary">
 <th>Nro</th>
@@ -84,7 +85,7 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
     <td><?= $row['estado'] ?></td>    
         <td>
         <a href="sistema/modnota.php?id=<?= $row['id_Nota'] ?>">
-          <button class="btn btn-primary">Modificar</button>
+          <button class="btn btn-primary">Ver</button>
           </a> 
           <button onclick="eliminarModal(<?= $row['id_Nota'] ?>)" class="btn btn-danger">Eliminar</button>
         
@@ -94,6 +95,68 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
 </tbody>
 </table>
 </div>
+</div>
+
+<h2 style="text-align: center;">Notas Aprobadas</h2>
+<div class="contenedor notas">
+<div class="table-responsive">
+<table class="table">
+<thead class="text-primary">
+<th>Nro</th>
+<th>Personal Autorizado</th>
+<th>Vencimiento</th>
+<th>Estado</th>
+<th>Acciones</th>
+</thead>
+<tbody>
+<?php while ($row = $notasaprobadas->fetch_assoc()): ?>
+    <tr>
+    <td><?= $row['id_Nota'] ?></td>
+    <td><?= htmlspecialchars($row['personal']) ?></td>
+    <td><?= $row['vencimiento'] ?></td> 
+    <td><?= $row['estado'] ?></td>    
+        <td>
+          <button onclick="eliminarModal(<?= $row['id_Nota'] ?>)" class="btn btn-danger">Eliminar</button>
+        </td>    
+    </tr>
+    <?php endwhile; ?>
+</tbody>
+</table>
+</div>
+</div>
+
+<h2 style="text-align: center;">Notas Rechazadas</h2>
+<div class="contenedor notas">
+<div class="table-responsive">
+<table class="table">
+<thead class="text-primary">
+<th>Nro</th>
+<th>Personal Autorizado</th>
+<th>Vencimiento</th>
+<th>Estado</th>
+<th>Acciones</th>
+</thead>
+<tbody>
+<?php while ($row = $notasrechazadas->fetch_assoc()): ?>
+    <tr>
+    <td><?= $row['id_Nota'] ?></td>
+    <td><?= htmlspecialchars($row['personal']) ?></td>
+    <td><?= $row['vencimiento'] ?></td> 
+    <td><?= $row['estado'] ?></td>    
+        <td>
+        <a href="sistema/modnota.php?id=<?= $row['id_Nota'] ?>">
+          <button class="btn btn-primary">Ver</button>
+          </a> 
+          <button onclick="eliminarModal(<?= $row['id_Nota'] ?>)" class="btn btn-danger">Eliminar</button>
+        
+        </td>    
+    </tr>
+    <?php endwhile; ?>
+</tbody>
+</table>
+</div>
+</div>
+
 <div id="eliminarModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
