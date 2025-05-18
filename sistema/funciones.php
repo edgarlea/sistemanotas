@@ -13,6 +13,6 @@ $conn->query("DELETE FROM usuarios WHERE id = $id");
 $_SESSION['mensaje'] = 'El usuario fue eliminado correctamente!.';
 break; 
 }
-header("Location: /sistemanotas/index.php");
+header("Location: /index.php");
 exit;
 ?>

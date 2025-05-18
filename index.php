@@ -31,13 +31,13 @@ if (isset($_SESSION['mensaje'])) {
 <?php
 if ($activo){
     switch ($rol) {
-    case 'administrador':
+    case 'Administrador':
         require 'views/admin.view.php';
         break;
-    case 'visualizador':
+    case 'Visualizador':
         require 'views/visual.view.php';
         break;
-    case 'empresa':
+    case 'Empresa':
         require 'views/empresa.view.php';
         break;
     }    

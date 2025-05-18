@@ -21,9 +21,9 @@
     <label>Rol:</label>
     <select name="rol" id="roles" required onchange="mostrarCampos()">
         <option value="">Seleccionar</option>
-        <option value="empresa">Empresa</option>
-        <option value="administrador">Administrador</option>
-        <option value="visualizador">Visualizador</option>
+        <option value="Empresa">Empresa</option>
+        <option value="Administrador">Administrador</option>
+        <option value="Visualizador">Visualizador</option>
     </select><br> 
 
 <!--datos empresa-->
@@ -48,9 +48,9 @@
       <label>Jerarquia:</label>
       <select name="jerarquia">
         <option value="">Seleccionar</option>
-        <option value="jefe">Jefe</option>
-        <option value="supervisor">Supervisor</option>
-        <option value="auxiliar">Auxiliar</option>
+        <option value="Jefe">Jefe</option>
+        <option value="Supervisor">Supervisor</option>
+        <option value="Auxiliar">Auxiliar</option>
     </select><br>
       <label>Cargo:</label>
       <input type="text" name="cargo"><br>
@@ -65,11 +65,9 @@
 
       const rol = document.getElementById("roles").value;
 
-      if (rol === "empresa") {
+      if (rol === "Empresa") {
         document.getElementById("camposEmpresa").style.display = "block";
-      } else if (rol === "visualizador") {
-        
-    
+      } else if (rol === "Visualizador") {    
         document.getElementById("camposVisualizador").style.display = "block";
       }
     }
@@ -93,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $s->execute();
     $user = $s->insert_id;
     switch  ($rol){
-        case 'empresa':
+        case 'Empresa':
         $nomEmpresa = $conn->real_escape_string($_POST["nombreEmpresa"]);
         $resp = $conn->real_escape_string($_POST["respo"]);
         $tel = $_POST["tel"];
@@ -101,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $s->bind_param("isss", $user, $nomEmpresa, $tel, $resp);
         $s->execute();
         break;
-        case 'visualizador':
+        case 'Visualizador':
         $legajo=$_POST["legajo"];
       $nomVisual = $conn->real_escape_string($_POST["nomVisual"]);
       $apeVisual = $conn->real_escape_string($_POST["apeVisual"]);

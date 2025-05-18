@@ -1,6 +1,6 @@
 <?php
 $rol=$_SESSION["rol"];
-if ($rol!="administrador") {
+if ($rol!="Administrador") {
     header("Location: login.php");
     exit();
 }
@@ -25,7 +25,7 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
 </header>
 <nav>
     <ul id="menu">
-      <li><a href="index.php">Inicio</a></li>
+      <li><a href="/index.php">Inicio</a></li>
       <li><a href="#">Notas</a></li>
       <li><a href="#">Usuarios</a></li>
     </ul>
@@ -65,7 +65,7 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
 <div class="table-responsive">
 <table class="table">
 <thead class="text-primary">
-<th>Nro</th>
+<th>Nota Nro</th>
 <th>Empresa</th>
 <th>Personal Autorizado</th>
 <th>Vencimiento</th>
@@ -88,7 +88,7 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
     <td><?= $row['fecha_in'] ?></td>
     <td><?= $row['estado'] ?></td>
     <td>
-        <a href="sistema/modnota.php?id=<?= $row['id_Nota'] ?>">
+        <a href="sistema/vernota.php?id=<?= $row['id_Nota'] ?>">
           <button class="btn btn-primary">Ver</button>
           </a> 
           <button onclick="eliminarModal(<?= $row['id_Nota'] ?>)" class="btn btn-danger">Eliminar</button>

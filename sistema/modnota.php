@@ -16,7 +16,7 @@ if (isset($_SESSION['mensaje'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Nota</title>
-    <link rel="stylesheet" href="/sistemanotas/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <header>
@@ -25,7 +25,7 @@ if (isset($_SESSION['mensaje'])) {
 </header>
 <nav>
     <ul id="menu">
-      <li><a href="/sistemanotas/index.php">Inicio</a></li>
+      <li><a href="/index.php">Inicio</a></li>
       
     </ul>
 </nav>
@@ -52,7 +52,7 @@ if (isset($_SESSION['mensaje'])) {
 <input type="text" name="personalautorizado" id="personalautorizado" required><br><br>
 <label>Fecha de Vencimiento:</label>
 <input type="date" name="vencimiento" id="vencimiento" required><br><br>
-<button type="submit" class="btn btn-primary">Actualizar Nota</button>
+<button type="submit" class="btn btn-primary">Modificar Nota</button>
 </form>
 <h2 style="text-align: center;">Materiales Cargados <button onclick="abrirModal()" class="btn btn-primary">+ Agregar Material</button></h2>
 <div class="contenedor">
