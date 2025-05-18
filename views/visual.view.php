@@ -1,6 +1,7 @@
 <?php
 
-$result = $conn->query("SELECT * FROM notas WHERE estado = 'aprobada' AND vencimiento >= CURDATE();");
+$vigente = $conn->query("SELECT * FROM notas WHERE estado = 'Aprobado' AND vencimiento >= CURDATE();");
+//$vencido = $conn->query("SELECT * FROM notas WHERE estado = 'Aprobado' AND vencimiento < CURDATE();");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,35 +21,46 @@ $result = $conn->query("SELECT * FROM notas WHERE estado = 'aprobada' AND vencim
 <nav>
     <ul id="menu">
       <li><a href="index.php">Inicio</a></li>
-      <li><a href="ver_solicitudes.php">S</a></li>
-      <li><a href="crear_solicitud.php">Crear Solicitud</a></li>
-      <li><a href="usuarios.php">Usuarios</a></li>
-      <li><a href="reportes.php">Notas</a></li>
     </ul>
 </nav>
-<h2>Notas Vigentes</h2>
-<div class="contenedor usuarios">
+
+<div class="contenedor">
+<h4 style="text-align: center;">Notas Vigentes</h4>
+<div class="table-responsive">
 <table class="table">
 <thead class="text-primary">
-<th>Nro</th>
-<th></th>
-<th>Rol</th>
-<th>Activo</th>
+<th>Nota Nro</th>
+<th>Empresa</th>
+<th>Personal Autorizado</th>
+<th>Vencimiento</th>
+<th>Fecha de Ingreso</th>
+<th>Estado</th>
+<th>Acciones</th>
 </thead>
 <tbody>
-<?php while ($row = $result->fetch_assoc()): ?>
+<?php while ($row = $vigente->fetch_assoc()): ?>
     <tr>
-    <td><?= $row['id'] ?></td>
-    <td><?= htmlspecialchars($row['nomusu']) ?></td>
-    <td><?= $row['rol'] ?></td>    
-        <td>NO
-        <a href="aprobar.php?id=<?= $row['id'] ?>">Aprobar</a> 
-        <a href="rechazar.php?id=<?= $row['id'] ?>">Rechazar</a>
-        </td>    
+    <td><?= $row['id_Nota'] ?></td>
+    <td><?php
+    $idemp=$row['id_Empresa'];
+    $empresa = $conn->query("SELECT nombre FROM empresas WHERE id_Empresa='$idemp'");
+    $emp=$empresa->fetch_assoc();
+    echo $emp['nombre'];
+    ?></td>
+    <td><?= $row['personal'] ?></td>    
+    <td><?= $row['vencimiento'] ?></td>
+    <td><?= $row['fecha_in'] ?></td>
+    <td><?= $row['estado'] ?></td>
+    <td>
+        <a href="sistema/vernota.php?id=<?= $row['id_Nota'] ?>">
+          <button class="btn btn-primary">Ver</button>
+          </a> 
+        </td>     
     </tr>
     <?php endwhile; ?>
 </tbody>
 </table>
+</div>
 </div>
 <div class="contenedor">
 
