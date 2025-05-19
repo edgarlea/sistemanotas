@@ -36,8 +36,10 @@ $rol=$_SESSION["rol"];
   if ($ap!=null){
     if ($nota['estado'] ==="Rechazado"){
         echo  "<th style='color:red;'>Rechazado por:</th>";
+        echo  "<th style='color:red;'>Motivo por:</th>";
     }else{
        echo  "<th>Aprobado por:</th>";
+       echo  "<th>Observaciones:</th>";
     }
  
   }
@@ -49,9 +51,9 @@ $rol=$_SESSION["rol"];
 <tbody>
     <tr>
  <?php
-  $ap=$nota['aprueba'];
   if ($ap!=null){
    echo "<td>". $ap."</td>";
+   echo "<td>". $nota['observacion']."</td>";
   }
   ?>
     <td><?= $nota['personal'] ?></td>

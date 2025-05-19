@@ -27,7 +27,7 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
     <ul id="menu">
       <li><a href="/index.php">Inicio</a></li>
       <li><a href="/sistema/notas.php">Notas</a></li>
-      <li><a href="#">Usuarios</a></li>
+      <li><a href="/sistema/usuarios.php">Usuarios</a></li>
     </ul>
 </nav>
 <h2>Pendientes</h2>

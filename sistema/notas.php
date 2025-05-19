@@ -47,6 +47,9 @@ if ($rol=="Empresa"){
     <ul id="menu">
       <li><a href="/index.php">Inicio</a></li>
       <li><a href="notas.php">Notas</a></li>
+      <?php if ($rol=="Administrador"): ?>
+        <li><a href="usuarios.php">Usuarios</a></li>
+        <?php endif;?>
     </ul>
 </nav>
 <br>
