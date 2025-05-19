@@ -25,6 +25,9 @@ $rol=$_SESSION["rol"];
     <ul id="menu">
       <li><a href="/index.php">Inicio</a></li>
       <li><a href="notas.php">Notas</a></li>
+      <?php if($rol=="Administrador"): ?>
+        <li><a href="usuarios.php">Usuarios</a></li>
+        <?php endif;?>
     </ul>
 </nav>
 <h2 style="text-align: center;">Nota de Autorizacion Nº<?= $nota['id_Nota'] ?></h2>
@@ -103,7 +106,8 @@ echo "<br>
         <option value=''>Seleccionar</option>
         <option value='Aprobado'>Aprobar</option>
         <option value='Rechazado'>Rechazar</option>
-    </select></h3><br>
+    </select></h3>
+<label for='observacion'>Observaciones:</label><br>
 <textarea name='observacion' rows='4' cols='50'></textarea><br>
 <button type='submit' class='btn btn-primary'>Aceptar</button><br>
 </form>

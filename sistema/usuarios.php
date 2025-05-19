@@ -53,7 +53,7 @@ if (isset($_GET['buscar'])) {
 <th>Nombre de Usuario</th>
 <th>Tipo</th>
 <th>Activo</th>
-<th>Acciones</th>
+<!--<th>Acciones</th>-->
 </thead>
 <tbody>
 
@@ -71,10 +71,10 @@ if (isset($_GET['buscar'])) {
            }
            ?> 
         </td>
-            <td>
+    <!--        <td>
         <a href="sistema/funciones.php?op=a&id=<?= $row['id'] ?>"><button class="btn btn-primary">Activar</button></a> 
       <button onclick="eliminarUsuarioModal(<?= $row['id'] ?>)" class="btn btn-danger">Eliminar</button>  
-      </td>    
+      </td> -->   
     </tr>
     <?php endwhile; ?>
 <?php else: ?>
