@@ -94,17 +94,18 @@ $rol=$_SESSION["rol"];
 <?php
 if($rol=="Administrador"){
 echo "<br>
-<div class='contenedor'>  
+<div class='contenedor' style='text-align: center;'>  
     <form action='apruebanota.php' method='POST'>
   <input type='number'name='idnota' value=". $nota['id_Nota'] ." hidden>
   <input type='text'name='nomusu' value=". $usu ." hidden>
-<h3 style='text-align: center;'>Desea aprobar o rechazar la nota?:
+<h3>Desea aprobar o rechazar la nota?:
 <select name='aprob' required>
         <option value=''>Seleccionar</option>
         <option value='Aprobado'>Aprobar</option>
         <option value='Rechazado'>Rechazar</option>
-    </select>
-<button type='submit' class='btn btn-primary'>Aceptar</button></h3><br><br>
+    </select></h3><br>
+<textarea name='observacion' rows='4' cols='50'></textarea><br>
+<button type='submit' class='btn btn-primary'>Aceptar</button><br>
 </form>
 </div>";
 }

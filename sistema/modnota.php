@@ -37,11 +37,30 @@ unset($_SESSION['mensaje']);
 <div class="contenedor notas">
 <table class="table">
 <thead class="text-primary">
+    <?php
+  $ap=$nota['aprueba'];
+  if ($ap!=null){
+    if ($nota['estado'] ==="Rechazado"){
+        echo  "<th style='color:red;'>Rechazado por:</th>";
+        echo  "<th style='color:red;'>Motivo por:</th>";
+    }else{
+       echo  "<th>Aprobado por:</th>";
+       echo  "<th>Observaciones:</th>";
+    }
+ 
+  }
+  ?>
 <th>Personal Autorizado</th>
 <th>Vencimiento</th>
 </thead>
 <tbody>
     <tr>
+       <?php
+  if ($ap!=null){
+   echo "<td>". $ap."</td>";
+   echo "<td>". $nota['observacion']."</td>";
+  }
+  ?>
     <td><?= $nota['personal'] ?></td>
     <td><?= $nota['vencimiento'] ?></td>    
     </tr>

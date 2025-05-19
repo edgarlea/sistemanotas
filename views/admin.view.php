@@ -34,7 +34,7 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
 <?php if ($mensaje): ?>
   <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
     <?= htmlspecialchars($mensaje) ?>
-    <span class="close-btn" onclick="this.parentElement.remove()">&times;</span>
+    <span class="close" onclick="this.parentElement.remove()">&times;</span>
   </div>
 <?php endif; ?>
 <div class="contenedor">

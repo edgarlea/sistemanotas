@@ -229,6 +229,7 @@ function agregarMaterial() {
   const nuevo = document.createElement('div');
   nuevo.classList.add('material');
   nuevo.innerHTML = `
+   <span class="close" onclick="eliminarMaterial(this)">&times;</span>
   <br>  
   <label>Nombre:</label>
     <input type="text" name="material_nombre[]" required><br>
@@ -240,6 +241,10 @@ function agregarMaterial() {
     <textarea name="material_descripcion[]" rows="4" cols="30"></textarea><br><br>
   `;
   container.appendChild(nuevo);
+}
+function eliminarMaterial(boton) {
+  const material = boton.closest('.material');
+  material.remove();
 }
 </script>
 </body>
