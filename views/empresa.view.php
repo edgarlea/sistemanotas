@@ -3,9 +3,9 @@ $id=$_SESSION["user_id"];
 $result = $conn->query("SELECT * FROM empresas WHERE id_Usuario = '$id'");
 $empresa = $result->fetch_assoc();
 $id_empresa=$empresa['id_Empresa'];
-$notaspendientes = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_empresa' AND estado='pendiente'");
-$notasaprobadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_empresa' AND estado='aprobado'");
-$notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_empresa' AND estado='rechazado'");
+$notaspendientes = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_empresa' AND estado='Pendiente'");
+$notasaprobadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_empresa' AND estado='Aprobado'");
+$notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_empresa' AND estado='Rechazado'");
 
 ?>
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
     <ul id="menu">
       <li><a href="index.php">Inicio</a></li>
       <li><a href="#" onclick="crearnota();">Crear Nota</a></li>
-      <li><a href="#">Notas</a></li>
+      <li><a href="/sistema/notas.php">Notas</a></li>
     </ul>
 </nav>
 <div class="contenedor opciones" id="contenedornota">
@@ -77,6 +77,7 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
 <th>Acciones</th>
 </thead>
 <tbody>
+<?php if ($notaspendientes && $notaspendientes->num_rows > 0): ?>
 <?php while ($row = $notaspendientes->fetch_assoc()): ?>
     <tr>
     <td><?= $row['id_Nota'] ?></td>
@@ -95,6 +96,11 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
         </td>    
     </tr>
     <?php endwhile; ?>
+<?php else: ?>
+    <tr>
+        <td colspan="5">Sin pendientes</td>
+    </tr>
+<?php endif; ?>
 </tbody>
 </table>
 </div>
@@ -150,10 +156,9 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
     <td><?= $row['estado'] ?></td>    
         <td>
         <a href="sistema/modnota.php?id=<?= $row['id_Nota'] ?>">
-          <button class="btn btn-primary">Ver</button>
+          <button class="btn btn-primary">Modificar</button>
           </a> 
           <button onclick="eliminarModal(<?= $row['id_Nota'] ?>)" class="btn btn-danger">Eliminar</button>
-        
         </td>    
     </tr>
     <?php endwhile; ?>
@@ -172,6 +177,7 @@ $notasrechazadas = $conn->query("SELECT * FROM notas WHERE id_Empresa = '$id_emp
       <div class="modal-body">
         <input type="number" name="idnota" id="idNota" hidden>
         <h3>Esta seguro que quiere eliminar la nota?</h3>
+        <h5>Esto tambien eliminara los materiales cargados en la nota</h5>
         <div style="display: flex; justify-content: space-between;">
           <button type="button" class="btn btn-danger" onclick="cerrarModal()">NO</button>
           <button type="submit" class="btn btn-primary">SI</button>

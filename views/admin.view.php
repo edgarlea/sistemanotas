@@ -26,7 +26,7 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
 <nav>
     <ul id="menu">
       <li><a href="/index.php">Inicio</a></li>
-      <li><a href="#">Notas</a></li>
+      <li><a href="/sistema/notas.php">Notas</a></li>
       <li><a href="#">Usuarios</a></li>
     </ul>
 </nav>
@@ -36,25 +36,32 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
 <div class="table-responsive">
 <table class="table">
 <thead class="text-primary">
-<th>ID</th>
+<th>Nº</th>
 <th>Nombre de Usuario</th>
-<th>Rol</th>
+<th>Tipo</th>
 <th>Activo</th>
 <th>Acciones</th>
 </thead>
 <tbody>
+
+<?php if ($result && $result->num_rows > 0): ?>
 <?php while ($row = $result->fetch_assoc()): ?>
     <tr>
-    <td><?= $row['id'] ?></td>
+    <td><?=$row['id'] ?></td>
     <td><?= htmlspecialchars($row['nomusu']) ?></td>
     <td><?= $row['rol'] ?></td>    
         <td>NO</td>
             <td>
         <a href="sistema/funciones.php?op=a&id=<?= $row['id'] ?>"><button class="btn btn-primary">Activar</button></a> 
-        <a href="sistema/funciones.php?op=r&id=<?= $row['id'] ?>"><button class="btn btn-danger">Eliminar</button></a>
-        </td>    
+      <button onclick="eliminarUsuarioModal(<?= $row['id'] ?>)" class="btn btn-danger">Eliminar</button>  
+      </td>    
     </tr>
     <?php endwhile; ?>
+<?php else: ?>
+    <tr>
+        <td colspan="5">Sin pendientes</td>
+    </tr>
+<?php endif; ?>
 </tbody>
 </table>
 </div>
@@ -74,6 +81,7 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
 <th>Acciones</th>
 </thead>
 <tbody>
+<?php if ($notas && $notas->num_rows > 0): ?>
 <?php while ($row = $notas->fetch_assoc()): ?>
     <tr>
     <td><?= $row['id_Nota'] ?></td>
@@ -95,6 +103,11 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
         </td>     
     </tr>
     <?php endwhile; ?>
+<?php else: ?>
+    <tr>
+        <td colspan="7">Sin pendientes</td>
+    </tr>
+<?php endif; ?>
 </tbody>
 </table>
 </div>
@@ -119,14 +132,37 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
     </form>
   </div>
 </div>
-
+<div id="eliminarUsuarioModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Eliminar Usuario</h3>
+      <span class="close" onclick="cerrarModal()">&times;</span>
+    </div>
+    <form action="/sistema/funciones.php" method="GET">
+      <div class="modal-body">
+        <input type="text" name="op" value="r" hidden>
+         <input type="number" name="id" id="idUsuarioEliminar" hidden>
+        <h3>Esta seguro que quiere eliminar al usuario?</h3>
+        <div style="display: flex; justify-content: space-between;">
+          <button type="button" class="btn btn-danger" onclick="cerrarModal()">NO</button>
+          <button type="submit" class="btn btn-primary">SI</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 <script>
       function eliminarModal(idNota) {
     document.getElementById('eliminarModal').style.display = 'block';
     document.getElementById('idNota').value = idNota;
   }
+   function eliminarUsuarioModal(id) {
+    document.getElementById('idUsuarioEliminar').value = id;
+    document.getElementById('eliminarUsuarioModal').style.display = 'block';
+  }
     function cerrarModal() {
     document.getElementById('eliminarModal').style.display = 'none';
+    document.getElementById('eliminarUsuarioModal').style.display = 'none';
   }
 window.onclick = function(event) {
 const modal = document.getElementById('eliminarModal');

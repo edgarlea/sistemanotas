@@ -24,8 +24,7 @@ $rol=$_SESSION["rol"];
 <nav>
     <ul id="menu">
       <li><a href="/index.php">Inicio</a></li>
-      <li><a href="#">Notas</a></li>
-      <li><a href="#">Usuarios</a></li>
+      <li><a href="notas.php">Notas</a></li>
     </ul>
 </nav>
 <h2 style="text-align: center;">Nota de Autorizacion Nº<?= $nota['id_Nota'] ?></h2>
@@ -35,7 +34,12 @@ $rol=$_SESSION["rol"];
   <?php
   $ap=$nota['aprueba'];
   if ($ap!=null){
-  echo  "<th>Aprobado por:</th>";
+    if ($nota['estado'] ==="Rechazado"){
+        echo  "<th style='color:red;'>Rechazado por:</th>";
+    }else{
+       echo  "<th>Aprobado por:</th>";
+    }
+ 
   }
   ?>
  
@@ -50,8 +54,6 @@ $rol=$_SESSION["rol"];
    echo "<td>". $ap."</td>";
   }
   ?>
-
-    
     <td><?= $nota['personal'] ?></td>
     <td><?= $nota['vencimiento'] ?></td>    
     </tr>
@@ -72,7 +74,7 @@ $rol=$_SESSION["rol"];
 <tbody>
 <?php while ($row = $materiales->fetch_assoc()): ?>
     <tr>
-    <td><?= $row['id'] ?></td>
+    <td><?=$row['id']?></td>
     <td><?= htmlspecialchars($row['nombre']) ?></td>
     <td><?= $row['tipo'] ?></td> 
     <td><?= $row['cant'] ?></td>
@@ -89,11 +91,11 @@ $rol=$_SESSION["rol"];
 
 <?php
 if($rol=="Administrador"){
-echo "<h4>Acciones</h4>
+echo "<br>
 <div class='contenedor'>  
     <form action='apruebanota.php' method='POST'>
   <input type='number'name='idnota' value=". $nota['id_Nota'] ." hidden>
-  <input type='number'name='nomusu' value=". $usu ." hidden>
+  <input type='text'name='nomusu' value=". $usu ." hidden>
 <h3 style='text-align: center;'>Desea aprobar o rechazar la nota?:
 <select name='aprob' required>
         <option value=''>Seleccionar</option>
