@@ -31,6 +31,12 @@ $notas = $conn->query("SELECT * FROM notas where estado='pendiente'");
     </ul>
 </nav>
 <h2>Pendientes</h2>
+<?php if ($mensaje): ?>
+  <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <?= htmlspecialchars($mensaje) ?>
+    <span class="close-btn" onclick="this.parentElement.remove()">&times;</span>
+  </div>
+<?php endif; ?>
 <div class="contenedor">
 <h4 style="text-align: center;">Activar Cuenta de Usuarios</h4>
 <div class="table-responsive">

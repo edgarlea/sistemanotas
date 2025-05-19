@@ -4,10 +4,8 @@ $id = $_GET['id'];
 $nota = $conn->query("SELECT * FROM notas WHERE id_Nota = '$id'");
 $nota=$nota->fetch_assoc();
 $materiales=$conn->query("SELECT * FROM materiales WHERE id_Nota = '$id'");
-if (isset($_SESSION['mensaje'])) {
-    echo "<script>alert('" . $_SESSION['mensaje'] . "');</script>";
-    unset($_SESSION['mensaje']);
-}
+$mensaje=$_SESSION['mensaje'] ?? null;
+unset($_SESSION['mensaje']);
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +24,15 @@ if (isset($_SESSION['mensaje'])) {
 <nav>
     <ul id="menu">
       <li><a href="/index.php">Inicio</a></li>
-      
+      <li><a href="notas.php">Notas</a></li>
     </ul>
 </nav>
+<?php if ($mensaje): ?>
+  <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <?= htmlspecialchars($mensaje) ?>
+    <span class="close" onclick="this.parentElement.remove()">&times;</span>
+  </div>
+<?php endif; ?>
 <h2 style="text-align: center;">Nota de Autorización Nº<?= $nota['id_Nota'] ?></h2>
 <div class="contenedor notas">
 <table class="table">

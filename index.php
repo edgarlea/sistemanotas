@@ -7,10 +7,8 @@ if ($_SESSION["user_id"]){
     header("Location: login.php");
     exit();
 }
-if (isset($_SESSION['mensaje'])) {
-    echo "<script>alert('" . $_SESSION['mensaje'] . "');</script>";
-    unset($_SESSION['mensaje']);
-}
+$mensaje=$_SESSION['mensaje'] ?? null;
+unset($_SESSION['mensaje']);
 ?>
 
 <!DOCTYPE html>

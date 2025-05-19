@@ -1,8 +1,6 @@
 <?php include 'sistema/conexion.php'; 
-if (isset($_SESSION['mensaje'])) {
-    echo "<script>alert('" . $_SESSION['mensaje'] . "');</script>";
-    unset($_SESSION['mensaje']);
-}
+$mensaje=$_SESSION['mensaje'] ?? null;
+unset($_SESSION['mensaje']);
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +11,11 @@ if (isset($_SESSION['mensaje'])) {
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <?php if ($mensaje): ?>
+  <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <?= htmlspecialchars($mensaje) ?>
+  </div>
+<?php endif; ?>
 <div class="contenedor" style="height: 200px; width:300px; text-align:center;margin: 0 auto">
 <form method="POST">
     <h2>Iniciar sesión</h2>

@@ -1,7 +1,5 @@
 <?php
-
 $vigente = $conn->query("SELECT * FROM notas WHERE estado = 'Aprobado' AND vencimiento >= CURDATE();");
-//$vencido = $conn->query("SELECT * FROM notas WHERE estado = 'Aprobado' AND vencimiento < CURDATE();");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -39,6 +37,7 @@ $vigente = $conn->query("SELECT * FROM notas WHERE estado = 'Aprobado' AND venci
 <th>Acciones</th>
 </thead>
 <tbody>
+<?php if ($vigente && $vigente->num_rows > 0): ?>
 <?php while ($row = $vigente->fetch_assoc()): ?>
     <tr>
     <td><?= $row['id_Nota'] ?></td>
@@ -59,12 +58,14 @@ $vigente = $conn->query("SELECT * FROM notas WHERE estado = 'Aprobado' AND venci
         </td>     
     </tr>
     <?php endwhile; ?>
+<?php else: ?>
+    <tr>
+        <td colspan="7">Sin pendientes</td>
+    </tr>
+<?php endif; ?>
 </tbody>
 </table>
 </div>
-</div>
-<div class="contenedor">
-
 </div>
 <script>
     function toggleMenu() {
